@@ -3,22 +3,25 @@ const compound = require('compound-interest')
 
 function App() {
   const [data,setData] = useState({})
+  const submitHandler = ()=>{ 
+
+  }
   return (
     <div >
       <form>
-        <label>initial value</label>
+        <p>initial value</p>
         <input/>
-        <label>contribution frequency</label>
+        <p>contribution frequency</p>
         <select>
           <option>monthly</option>
           <option>daily</option>
           <option>yearly</option>
         </select>
-        <label>amount per period</label>
+        <p>amount per period</p>
         <input/>
-        <label>Interest rate</label>
+        <p>Interest rate</p>
         <input/>
-        <label>Amount of years</label>
+        <p>Amount of years</p>
         <input/>
       </form>
     </div>
