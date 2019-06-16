@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
-const compound = require('compound-interest')
+const Finance = require('financejs');
+const finance = new Finance();
 
 function App() {
   const [data,setData] = useState({period: "12"})
+  const [result, setResult] = useState(null)
+
   const changeHandler = (event)=>{ 
     setData({...data, [event.target.name]:event.target.value })
   }
@@ -12,17 +15,14 @@ function App() {
     data.amt = Number(data.amt);
     data.intRate = Number(data.intRate);
     data.years = Number(data.years)
-    const opts = {
-      initial: data.initVal,
-      monthly: data.amt,
-      interest:data.intRate,
-      compound: data.period,
-      years: data.years
-    };
-    const result = compound(opts);
+
+    let principal = finance.CI(data.intRate,data.period,data.initVal,data.years)
+    let intRate = data.intRate/data.period
+    let periods = data.period*data.years
+    let cashFlow = finance.FV(intRate,data.amt,periods)
+
+    let result = cashFlow+principal
     console.log(result)
-    const graph = compound.verbose(opts);
-    console.log(graph)
   }
   return (
     <div >
