@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-const Finance = require('financejs');
-const finance = new Finance();
+const compound = require('compound-interest-calc')
 
 function App() {
   const [data,setData] = useState({period: "12"})
@@ -13,15 +12,10 @@ function App() {
     data.initVal = Number(data.initVal);
     data.period = Number(data.period);
     data.amt = Number(data.amt);
-    data.intRate = Number(data.intRate);
-    data.years = Number(data.years)
-
-    let principal = finance.CI(data.intRate,data.period,data.initVal,data.years)
-    let intRate = data.intRate/data.period
-    let periods = data.period*data.years
-    let cashFlow = finance.FV(intRate,data.amt,periods)
-
-    let result = cashFlow+principal
+    data.intRate = Number(data.intRate)/100;
+    data.years = Number(data.years);
+    console.log(data.intRate)
+    let result = compound(data.initVal,data.amt, data.years,data.intRate,data.period)
     console.log(result)
   }
   return (
