@@ -4,7 +4,7 @@ const compound = require('compound-interest-calc')
 function App() {
   const [data,setData] = useState({period: "12"})
   const [result, setResult] = useState(null)
-
+  const [response, setResponse] = useState({})
   const changeHandler = (event)=>{ 
     setData({...data, [event.target.name]:event.target.value })
   }
@@ -14,13 +14,15 @@ function App() {
     data.amt = Number(data.amt);
     data.intRate = Number(data.intRate)/100;
     data.years = Number(data.years);
-    console.log(data.intRate)
+
     let result = compound(data.initVal,data.amt, data.years,data.intRate,data.period)
+    setResponse(...result)
     console.log(result)
+    console.log(response)
   }
   return (
     <div >
-      <form>
+      <form onSubmit = {submitHandler}>
         <p>initial value</p>
         <input 
         name = 'initVal'
