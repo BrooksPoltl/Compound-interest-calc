@@ -1,24 +1,30 @@
 import React, {useState} from 'react';
-const compound = require('compound-interest-calc')
+import ResponseGraph from './ResponseGraph'
 
-function App() {
+const compound = require('compound-interest-calc');
+
+const  App = ()=> {
   const [data,setData] = useState({period: "12"})
-  const [result, setResult] = useState(null)
-  const [response, setResponse] = useState({})
+  const [response, setResponse] = useState(null)
   const changeHandler = (event)=>{ 
     setData({...data, [event.target.name]:event.target.value })
   }
-  const submitHandler = () =>{
+  const submitHandler = async() =>{
     data.initVal = Number(data.initVal);
     data.period = Number(data.period);
     data.amt = Number(data.amt);
     data.intRate = Number(data.intRate)/100;
     data.years = Number(data.years);
 
-    let result = compound(data.initVal,data.amt, data.years,data.intRate,data.period)
-    setResponse(...result)
+    let result = await compound(data.initVal,data.amt, data.years,data.intRate,data.period)
     console.log(result)
-    console.log(response)
+    setResponse({...result})
+    return response
+  }
+  if(response){
+    return(
+      <ResponseGraph responseData = {response}/>
+    )
   }
   return (
     <div >
