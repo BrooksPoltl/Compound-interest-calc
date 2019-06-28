@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import ResponseGraph from './ResponseGraph'
+import './styles/App.css'
 
 const compound = require('compound-interest-calc');
 
@@ -27,19 +28,22 @@ const  App = ()=> {
     )
   }
   return (
-    <div >
-      <form onSubmit = {submitHandler}>
-        <p>initial value</p>
-        <input 
+    <div className = 'container' >
+      <h1>Compound Interest Calculator</h1>
+      <form  className ='form' onSubmit = {submitHandler}>
+        <p className = 'text'>initial value</p>
+        <input
+        className = 'input'
         name = 'initVal'
         type = "number"
         onChange = {(event)=> changeHandler(event)} 
         value = {data.initVal}
         />
-        <p>contribution frequency</p>
+        <p className = 'text'>contribution frequency</p>
         <select 
+          className = 'dropdown'
           name = 'period' 
-        type = "number"
+          type = "number"
           value = {data.period}
           onChange = {(event)=>changeHandler(event)}
           >
@@ -47,31 +51,35 @@ const  App = ()=> {
           <option value = "365">daily</option>
           <option value = "1">yearly</option>
         </select>
-        <p>amount per period</p>
+        <p className = 'text'>amount per period</p>
         <input 
+          className = 'input'
           name = 'amt'
-        type = "number"
+          type = "number"
           onChange = {(event)=> changeHandler(event)}
           value = {data.amt} 
           />
-        <p>Interest rate percentage</p>
+        <p className = 'text'>Interest rate percentage</p>
         <input 
+          className = 'input' 
           name = 'intRate'
-        type = "number"
+          type = "number"
           onChange = {(event)=> changeHandler(event)}
           value = {data.intRate}
           />
-        <p>Amount of years</p>
+        <p className = 'text'>Amount of years</p>
         <input 
+          className = 'input'
           name = 'years' 
           type = "number"
           onChange = {(event)=> changeHandler(event)} 
           value = {data.years}
           />
         <button 
+          className = 'button'
           type = 'button'
           onClick = {submitHandler}
-        >click me</button>
+        >Submit</button>
       </form>
     </div>
   );
